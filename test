@@ -1,1 +1,22 @@
 
+# Run all states
+python main.py run
+
+# Run one state
+python main.py run --state Kansas
+
+# Look up by license number
+python main.py verify --license-number TD000567
+
+# Look up by business name
+python main.py verify --business-name "Core-Mark"
+
+python main.py verify --license-number 2000015
+
+
+
+# Find all expired in a state
+python main.py verify --status Expired --state Washington
+
+# Export results
+python main.py verify --status Expired --state Washington --export wa_expired.csv

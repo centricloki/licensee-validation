@@ -1,0 +1,2 @@
+2026-06-29 19:16:09 | INFO     | __main__ | Loaded 43965 records from output\master_tobacco_licenses.csv
+2026-06-29 19:16:09 | INFO     | __main__ | Filter: license_number contains '2000015'

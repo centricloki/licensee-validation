@@ -1,0 +1,371 @@
+Total rows with 'License Number with Expiry': 14
+Columns in State Lookup:
+['State', 'Tier', 'Tier Description', 'Licensing Agency', 'Retailer Data Public?', 'Distributor/Wholesaler Data Public?', 'Data Format', 'Refresh Cadence', 'Primary URL', 'Automation Method', 'Notes', 'Download Format(s)', 'License Availability', 'Data Available in Schema ', 'Steps to Fetch Data', 'Sample data']
+
+============================================================
+STATE: Delaware
+============================================================
+State: Delaware
+Tier: 1
+Tier Description: Tier 1 - Open data / API / bulk file
+Licensing Agency: Division of Revenue
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Open data (Socrata) + search portal
+Refresh Cadence: Ongoing
+Primary URL: https://data.delaware.gov/Licenses-and-Certifications/Delaware-Business-Licenses/5zy2-grhr
+Automation Method: API / bulk download
+Notes: Tobacco licenses are business-license types; portal: revenue.delaware.gov/business-license-search/
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : Business name | Trade name | Business Activity | Current license valid from | Current license valid to | Address 1 | Address 2 | City | State | Zip | Country | License number | Geocoded Location
+Steps to Fetch Data: 1. Click Action button > Select API > Use API Endpoint or Bulk Download 
+
+2. API endpoint: https://data.delaware.gov/api/v3/views/5zy2-grhr/query.json
+This API has a default limit of 1,000 rows, which can be modified.
+
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Delaware
+
+============================================================
+STATE: District of Columbia
+============================================================
+State: District of Columbia
+Tier: 1
+Tier Description: Tier 1 - Open data / API / bulk file
+Licensing Agency: Dept. of Licensing and Consumer Protection (DLCP)
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Open data + SCOUT portal
+Refresh Cadence: Ongoing
+Primary URL: https://opendata.dc.gov/datasets/DCGIS::basic-business-licenses/about
+Automation Method: API / bulk download (Only bulk download is available)
+Notes: BBL category 'Cigarette Retail/Wholesale'; verify at scout.dcra.dc.gov
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : Customer Number | License Status | License Type | License Subtype | License Status Date | License Start Date | Licensed End Date | Initial Issue Date | Primary Activity | Business Activity | Premise Address | Premise In DC | Entity Name | Entity Trade Name | Entity Type | Business Owner First Name | Business Owner Last Name | Business Owner MIddle Name | Business Owner Address | Billing Address | Billing Entity | Agent First Name | Agent Last Name | Agent Middle Name | Agent Entity | Data Refreshed On | Ward | Advisory Neighborhood Commission | Single Member District | District | Police Service Area | Neighborhood Cluster | Business Improvement District | Main Street | Master Address Repository Identifier | Square, Suffix, Lot | Latitude | Longitude | X Coordinate | Y Coordinate | GLOBALID | OBJECTID
+Steps to Fetch Data: 1. Download button available to get data in CSV and Json and plain text format
+2. Business Activity column to filter Cigarette Retail/Wholesale 
+
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\District of Columbia
+
+============================================================
+STATE: Pennsylvania
+============================================================
+State: Pennsylvania
+Tier: 1
+Tier Description: Tier 1 - Open data / API / bulk file
+Licensing Agency: Dept. of Revenue
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Socrata API (data.pa.gov)
+Refresh Cadence: Daily
+Primary URL: https://data.pa.gov/Licenses-Certificates/Tobacco-Products-Tax-Licenses-Current-Daily-County/ut72-sft8
+Automation Method: API
+Notes: All tiers incl. retailers; SODA/OData
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : County | Legal Name | Trade Name | Postal Code | Country | Account Code | License Type | Expiration Date | Street Address | City | State | Georeferenced Latitude & Longitude
+Steps to Fetch Data: 1. Click Action button > Select API > Use API Endpoint or Bulk Download 
+
+2. API endpoint: https://data.pa.gov/api/v3/views/ut72-sft8/query.json
+This API has a default limit of 1,000 rows, which can be modified.
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Pennsylvania
+
+============================================================
+STATE: Washington
+============================================================
+State: Washington
+Tier: 1
+Tier Description: Tier 1 - Open data / API / bulk file
+Licensing Agency: DOR Business Licensing (endorsements) + Liquor and Cannabis Board
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Excel download + Business Lookup
+Refresh Cadence: Ad hoc
+Primary URL: https://lcb.wa.gov/records/frequently-requested-lists
+Automation Method: Bulk download + lookup
+Notes: LCB 'Cigarette-Tobacco-Vapor Licensees' spreadsheet; DOR Business Lookup shows endorsements
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : UBI# | TradeName | PhysicalAddress | PhysicalCity | PhysicalState | PhysicalZip | County | Phone | EndorsementType | EndorsementExpireDate | Privilege code key
+Steps to Fetch Data: Scroll down to the Vapor and Tobacco section, Select Cigarette - Tobacco - Vapor Licensees, and click 'Cigarette - Tobacco - Vapor Licensees' to download an Excel file.
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Washington
+
+============================================================
+STATE: Wisconsin
+============================================================
+State: Wisconsin
+Tier: 1
+Tier Description: Tier 1 - Open data / API / bulk file
+Licensing Agency: DOR (permits all tiers); retail licenses via municipalities
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Excel download
+Refresh Cadence: Ad hoc
+Primary URL: https://www.revenue.wi.gov/DORReports/tobacco-product-permit.xlsx
+Automation Method: Bulk download
+Notes: Direct Excel of tobacco/vapor permittees
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : LegalName | BusinessName | BusinessAddress | City | State | Zip | County | Municipality | AgentName | Expiration | LastUpdated | Fee | CIG | TOB | VAP | OTC | VM
+Steps to Fetch Data: Open URL "https://www.revenue.wi.gov/Pages/OnlineServices/retail-tobacco-license-search.aspx"
+Locate section "Retail Cigarette, Tobacco Products, and Electronic Vaping Device License Search" and find CSV link to download file.
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Wisconsin
+
+============================================================
+STATE: Alaska
+============================================================
+State: Alaska
+Tier: 2
+Tier Description: Tier 2 - Online search portal
+Licensing Agency: Dept. of Revenue, Tax Division
+Retailer Data Public?: nan
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Search portal
+Refresh Cadence: Live
+Primary URL: https://online-tax.alaska.gov/ATP/WebDoc/_/#2
+Automation Method: Scripted single-record lookup
+Notes: 'Tobacco Dealer License Query' under Search for a License
+Download Format(s): Web-search
+License Availability: License Number with Expiry
+Data Available in Schema : License Number | Name as it appears on License | Business Name | City | License Description | Effective From | Effective To | Expiration Date
+Steps to Fetch Data: Click Search for a License button > Locate Excise Tax Licenses section and click Tobacco Distributor Licenses > Cigarette/Tobacco License Query with 
+License Year End and License Type > Generate and Export Excel
+License Type: Cigarette/Tobacco Distributor/ Wholesaler/Retailer
+
+Sample data: nan
+
+============================================================
+STATE: Kansas
+============================================================
+State: Kansas
+Tier: 2
+Tier Description: Tier 2 - Online search portal
+Licensing Agency: Dept. of Revenue
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Search portal
+Refresh Cadence: Live
+Primary URL: https://www.kdor.ks.gov/Apps/Misc/Miscellaneous/CigTobSearch
+Automation Method: Scripted single-record lookup
+Notes: Retailer / wholesaler / distributor / vendor types
+Download Format(s): Excel
+License Availability: License Number with Expiry
+Data Available in Schema : LICENSE NO | NAME | DBA NAME | LOCATION ADDRESS | CITY | STATE | ZIP | COUNTY | ISSUE DATE
++
+The tobacco distributor licenses are good for only one year, or from the issue date to the end of the year, so they all expire 12/31.  They could cancel the license before the expiration date.  If we enter a cancel date, the system automatically updates and it would no longer show on this list.  
+Steps to Fetch Data: To find tobacco distributors that have an active Tobacco Distributor’s license, please do the following:
+
+1)	Go to the website www.ksrevenue.gov
+2)	On orange strip, hover mouse over Taxation, select Business Tax
+3)	Select blue box Business Tax Forms in lower right-hand corner of screen
+4)	Under Forms and Instructions, select the 3rd bullet point Cigarette and Tobacco Licensing and Tax Information
+5)	About 1/3 of the way down the page, below Cigarette/Tobacco Registrations, there are some bullet points, some are indented, select the link that is back to the left Active Cigarette, Consumable Material, and Tobacco Licensee Database
+6)	Select the blue box in the lower left had corner Click here to access our database.
+7)	Under License Type, there is a drop-down menu that defaults to Cigarette Retailer, select the downward arrow the select Tobacco Distributor.   
+8)	You can narrow your search by selecting one or more of the following, Kansas County, City Name, and/or State.
+9)	In the blue box and in the lower left-hand corner of the screen, select Search.  This will bring up all certificates that are licensed in the State of Kansas based on your search criteria.  If you do not select any search criteria, it will bring up all active certificates.  
+
+Sample data: nan
+
+============================================================
+STATE: Kentucky
+============================================================
+State: Kentucky
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Dept. of Revenue
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: PDF
+Refresh Cadence: Ad hoc
+Primary URL: https://revenue.ky.gov/Business/TobaccoAndVaporProductsTaxes/Pages/Tobacco-Directories.aspx
+Automation Method: Download + parse
+Notes: Licensee list incl. name, DBA, address, license #, classification
+Download Format(s): PDF
+License Availability: License Number with Expiry
+Data Available in Schema : Tobacco Company | Brand Family | Style Descriptions
+
+Active 
+Steps to Fetch Data: 1. Open "https://revenue.ky.gov/Business/TobaccoAndVaporProductsTaxes/Pages/default.aspx"
+Locate  "Licensees - 06-4-2026" link and download PDF file.
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Kentucky
+
+============================================================
+STATE: Montana
+============================================================
+State: Montana
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Dept. of Revenue
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Downloadable list
+Refresh Cadence: Ad hoc
+Primary URL: https://mtrevenue.gov/?mdocs-file=63023
+Automation Method: Download + parse
+Notes: Active tobacco and vape products licenses
+Download Format(s): Web-list
+License Availability: License Number with Expiry
+Data Available in Schema : Application Name | Legacy License Number | License Subtype | License Number | Status | Expiration Date | Business Name | Business Address | City | State | Zip | County
+Steps to Fetch Data: 1. Search Businesses link and click More Resources for Business
+2. Expand Tobacco and Nicotine Taxes
+3. Click Active Tobacco License List to view Web List
+Sample data: nan
+
+============================================================
+STATE: New Hampshire
+============================================================
+State: New Hampshire
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Dept. of Revenue Administration
+Retailer Data Public?: nan
+Distributor/Wholesaler Data Public?: Yes (PDF)
+Data Format: PDF
+Refresh Cadence: Ad hoc
+Primary URL: https://www.revenue.nh.gov/forms/documents/wholesale.pdf
+Automation Method: Download + parse
+Notes: nan
+Download Format(s): Web-search
+License Availability: License Number with Expiry
+Data Available in Schema : Full Name | Profession | License Type | License Number | License Status | Expiry Date
+Steps to Fetch Data: Locate section "Need a Tobacco Tax Certificate?"  and click "https://www.enforcement.liquor.nh.gov/licensing".
+Locate section "Licensing" and click "Licensing Lookup".
+Enter valid paramter and search.
+Find list of Licensee and click on Licensee name.
+Detailed Information will have expiry date.
+Sample data: nan
+
+============================================================
+STATE: New Mexico
+============================================================
+State: New Mexico
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Regulation & Licensing Dept. (ABC)
+Retailer Data Public?: nan
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Web listing
+Refresh Cadence: Ad hoc
+Primary URL: https://www.rld.nm.gov/abc/tobacco-licensing/
+Automation Method: Download + parse
+Notes: nan
+Download Format(s): Web-search
+License Availability: License Number with Expiry
+Data Available in Schema : License Number | DBA Name | Business Name | Lessee | License Type | License Status | Expiration Date | Address | County | Local Option District | View
+Steps to Fetch Data: 1. Go to https://nmrldlpi.my.site.com/abc/s/public-search
+2. Select Regulation Type as Tobacco
+3. Select License Type and other details and Search
+Sample data: nan
+
+============================================================
+STATE: North Dakota
+============================================================
+State: North Dakota
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Attorney General
+Retailer Data Public?: Yes
+Distributor/Wholesaler Data Public?: Yes
+Data Format: Web lists
+Refresh Cadence: Ad hoc
+Primary URL: https://attorneygeneral.nd.gov/licensing-and-gaming/license-holders/
+Automation Method: Download + parse
+Notes: Wholesale and retail license holder lists
+Download Format(s): PDF
+License Availability: License Number with Expiry
+Data Available in Schema : License Number | Licensee Legal Name | DBA | Business Address | City | County | State | Zip | Phone | Expiration Date | License Status
+Steps to Fetch Data: 1. Locate "Tobacco"
+2. under this section, click "Retail Tobacco Licensees – by city" to download the Excel file.
+3. under this section, click "Wholesale Tobacco Licensees" to download the Excel file.
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\North Dakota
+
+============================================================
+STATE: Oregon
+============================================================
+State: Oregon
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Dept. of Revenue
+Retailer Data Public?: Yes (PDF)
+Distributor/Wholesaler Data Public?: Yes
+Data Format: PDF
+Refresh Cadence: Ad hoc
+Primary URL: https://www.oregon.gov/dor/programs/businesses/pages/statewide-tobacco-retail-license.aspx
+Automation Method: Download + parse
+Notes: Statewide tobacco retail license since 2022
+Download Format(s): Web-list
+License Availability: License Number with Expiry
+Data Available in Schema : License # | Customer Name | Premises Name | Premises Address | Premises City | Premises County | Effective | Expiration | Suspension Effective | Suspension Expiration
+Steps to Fetch Data: 1. Click 'List of Oregon tobacco retailers licensed with the Oregon Department of Revenue' under Resources
+Sample data: nan
+
+============================================================
+STATE: Rhode Island
+============================================================
+State: Rhode Island
+Tier: 3
+Tier Description: Tier 3 - Published list (PDF/web) only
+Licensing Agency: Division of Taxation
+Retailer Data Public?: nan
+Distributor/Wholesaler Data Public?: Yes (PDF)
+Data Format: PDF
+Refresh Cadence: Annual-ish
+Primary URL: https://tax.ri.gov
+Automation Method: Download + parse
+Notes: Cigarette + OTP distributor PDFs
+Download Format(s): PDF
+License Availability: License Number with Expiry
+Data Available in Schema : Name | Address | City | State | Zip | Effective | Expiration |
+Steps to Fetch Data: 1. Click Tax Section > Click Sales and Excise Taxes > Click Cigarette Tax
+2. Click link under Miscellaneous Links
+Unified License Dealers List
+Unified License Distributors List
+Sample data: \\devhoneysurf\HoneyReplatform\Tobacco License Verification by State\Rhode Island
+
+
+
+=========================================
+SHEET: Automation Guide
+=========================================
+Row 00 | Col 0: Tier 1 - Open data / API / bulk file | Col 1: nan
+Row 01 | Col 0: Tier 2 - Online search portal | Col 1: nan
+Row 02 | Col 0: Tier 3 - Published list only | Col 1: nan
+Row 03 | Col 0: Tier 4 - No public lookup | Col 1: nan
+Row 04 | Col 0: nan | Col 1: nan
+Row 05 | Col 0: Recommended architecture | Col 1: nan
+Row 06 | Col 0: nan | Col 1: 1. Rules engine: per-state config of required license types (seed from CDC STATE System licensure data: cdc.gov/statesystem/factsheets/licensure/Licensure.html).
+Row 07 | Col 0: nan | Col 1: 2. Tiered adapters: Tier 1 = SODA API queries / scheduled bulk downloads; Tier 3 = scheduled file download + parse (PDF/Excel); Tier 2 = polite, rate-limited single-record lookups at onboarding (never bypass CAPTCHAs); Tier 4 = collect license copy from distributor + verify with agency by phone/email.
+Row 08 | Col 0: nan | Col 1: 3. Normalize to one schema: state, license type, license number, legal name/DBA, address, status, suspension/revocation dates, source, as-of timestamp.
+Row 09 | Col 0: nan | Col 1: 4. Matching: license-number exact match when supplied; otherwise fuzzy name + normalized address.
+Row 10 | Col 0: nan | Col 1: 5. Re-verification: match each source's refresh cadence (TX ~daily, PA daily, NY weekly, CA monthly); re-check all active distributors monthly and alert on disappearance from list or new suspension date.
+Row 11 | Col 0: nan | Col 1: 6. Audit trail: store raw source snapshots + timestamps for every verification decision.
+Row 12 | Col 0: nan | Col 1: nan
+Row 13 | Col 0: Key open datasets (SODA APIs) | Col 1: nan
+Row 14 | Col 0: nan | Col 1: Texas - Active Cigarette/Tobacco Retailers (n4rp-ar9b): data.texas.gov/dataset/Active-Cigarette-Tobacco-Retailers/n4rp-ar9b (~daily)
+Row 15 | Col 0: nan | Col 1: New York - Registered Retail Dealers (55xf-9jat): data.ny.gov (weekly; incl. suspension/revocation dates). Wholesale: dataset 97vn-jxpr.
+Row 16 | Col 0: nan | Col 1: Pennsylvania - Tobacco Products Tax Licenses (ut72-sft8): data.pa.gov (daily)
+Row 17 | Col 0: nan | Col 1: California - CDTFA licensees: data.ca.gov + cdtfa.ca.gov/taxes-and-fees/LR-CA-Statewide.xlsx (monthly)
+Row 18 | Col 0: nan | Col 1: Delaware - Business Licenses (5zy2-grhr): data.delaware.gov (filter Business Activity = TOBACCO*)
+Row 19 | Col 0: nan | Col 1: DC - Basic Business Licenses: opendata.dc.gov (category Cigarette Retail/Wholesale)
+Row 20 | Col 0: nan | Col 1: Cook County IL - Wholesale Tobacco Dealers (fqrs-pn3x): datacatalog.cookcountyil.gov
+Row 21 | Col 0: nan | Col 1: nan
+Row 22 | Col 0: Commercial vendors | Col 1: nan
+Row 23 | Col 0: nan | Col 1: IGEN (igentax.com) - tobacco-focused; retailer license verification tool for wholesalers/distributors. Closest turnkey option.
+Row 24 | Col 0: nan | Col 1: Avior / TobTax (avior.tax) - tobacco tax compliance + license management; maintains per-state licensee directories.
+Row 25 | Col 0: nan | Col 1: Wolters Kluwer CT Corp / LicenseLogix - managed (human) license verification service incl. tobacco.
+Row 26 | Col 0: nan | Col 1: Middesk / Baselayer - KYB entity verification layer (SoS, IRS); no tobacco-specific coverage.
+Row 27 | Col 0: nan | Col 1: No major KYB vendor offers turnkey 50-state tobacco license verification via API.
+Row 28 | Col 0: nan | Col 1: nan
+Row 29 | Col 0: Corroborating signals | Col 1: nan
+Row 30 | Col 0: nan | Col 1: FDA Tobacco Compliance Check Outcomes (timp-ccid.fda.gov) - retailer inspections, warning letters, no-tobacco-sale orders (negative screening).
+Row 31 | Col 0: nan | Col 1: ATF PACT Act non-compliant delivery seller list (atf.gov) - updated at least every 4 months.
+Row 32 | Col 0: nan | Col 1: State AG MSA brand directories - verify products a distributor may legally sell (not licenses).
+Row 33 | Col 0: nan | Col 1: Seller's permit / sales tax registration lookups - prerequisite check, not proof of tobacco licensure.
+Row 34 | Col 0: nan | Col 1: nan
+Row 35 | Col 0: Legal notes on scraping | Col 1: nan
+Row 36 | Col 0: nan | Col 1: Scraping publicly accessible government data is generally permissible (hiQ v. LinkedIn), but respect terms of use, robots.txt, and rate limits.
+Row 37 | Col 0: nan | Col 1: Never circumvent CAPTCHAs or IP blocks (potential CFAA/DMCA exposure). For protected portals (e.g., SC MyDORWAY, LA ATC), fall back to manual verification.
+Row 38 | Col 0: nan | Col 1: Prefer published bulk files over scraping search forms where available.
+Row 39 | Col 0: nan | Col 1: Data compiled June 2026 from agent research of state agency sites; re-verify URLs periodically. This is not legal advice.

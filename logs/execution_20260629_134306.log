@@ -1,0 +1,3 @@
+2026-06-29 19:13:06 | INFO     | __main__ | Loaded 43965 records from output\master_tobacco_licenses.csv
+2026-06-29 19:13:06 | INFO     | __main__ | Filter: business name contains 'CORE-MARK'
+2026-06-29 19:13:06 | INFO     | __main__ | Filter: state in ['Kentucky']

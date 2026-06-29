@@ -1,0 +1,216 @@
+{
+  "states": {
+    "Delaware": {
+      "file_type": "excel",
+      "file_pattern": "*.xlsx",
+      "filter": {
+        "column": "Business Activity",
+        "contains": "TOBACCO"
+      },
+      "column_map": {
+        "License number": "license_number",
+        "Business name": "legal_name",
+        "Trade name": "dba",
+        "Address 1": "address",
+        "City": "city",
+        "State": "state_code",
+        "Zip": "zip",
+        "Current license valid from": "issue_date",
+        "Current license valid to": "expiration_date"
+      },
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "Filter Business Activity containing TOBACCO. License number and expiry are explicit."
+    },
+
+    "District of Columbia": {
+      "file_type": "csv",
+      "file_pattern": "*.csv",
+      "filter": {
+        "column": "BUSINESSACTIVITY",
+        "contains": "Cigarette"
+      },
+      "column_map": {
+        "CUSTOMERNUMBER": "license_number",
+        "ENTITYNAME": "legal_name",
+        "ENTITYTRADENAME": "dba",
+        "PREMISEADDRESS": "address",
+        "LICENSESTARTDATE": "issue_date",
+        "LICENSEENDDATE": "expiration_date",
+        "LICENSESTATUS": "status_raw"
+      },
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "Filter BUSINESSACTIVITY containing Cigarette. No separate City/Zip columns — address field is full address."
+    },
+
+    "Kansas": {
+      "file_type": "csv",
+      "file_pattern": "*.csv",
+      "filter": null,
+      "column_map": {
+        "LICENSE NO": "license_number",
+        "NAME": "legal_name",
+        "DBA NAME": "dba",
+        "LOCATION ADDRESS": "address",
+        "CITY": "city",
+        "STATE": "state_code",
+        "ZIP": "zip",
+        "COUNTY": "county",
+        "ISSUE DATE": "issue_date"
+      },
+      "status_rule": "year_end_expiry",
+      "expiration_date_field": null,
+      "expiry_month": 12,
+      "expiry_day": 31,
+      "notes": "Licenses expire Dec 31 of the issue year. Compute expiration_date = 12/31/<year of ISSUE DATE>."
+    },
+
+    "Kentucky": {
+      "file_type": "pdf",
+      "file_pattern": "*.pdf",
+      "filter": null,
+      "pdf_mode": "table",
+      "header_row_keywords": ["Licensee", "License Number", "Classification"],
+      "skip_rows_containing": ["Resident Wholesaler", "Distributor", "Transporter"],
+      "column_map": {
+        "Licensee": "legal_name",
+        "DBA": "dba",
+        "Address": "address",
+        "City": "city",
+        "State": "state_code",
+        "License Number": "license_number",
+        "Classification": "license_type"
+      },
+      "status_rule": "header_period",
+      "expiry_month": 6,
+      "expiry_day": 30,
+      "notes": "Expiry = June 30 of current license period (extracted from header: 'License Period July 1, YYYY through June 30, YYYY'). All listed licensees are active."
+    },
+
+    "North Dakota": {
+      "file_type": "pdf",
+      "file_pattern": "*.pdf",
+      "filter": null,
+      "pdf_mode": "text",
+      "column_map": {
+        "License": "license_number",
+        "Licensee Legal Name": "legal_name",
+        "DBA": "dba",
+        "Business Address": "address",
+        "City": "city",
+        "County": "county",
+        "State": "state_code",
+        "Zip": "zip",
+        "Phone": "phone",
+        "Expiration Date": "expiration_date",
+        "License Status": "status_raw"
+      },
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "Two PDF files: Retail (TR prefix) and Wholesale (TW prefix). Expiration date is explicit. Parse text rows."
+    },
+
+    "Pennsylvania": {
+      "file_type": "excel",
+      "file_pattern": "*.xlsx",
+      "filter": null,
+      "column_map": {
+        "Account Code": "license_number",
+        "Legal Name": "legal_name",
+        "Trade Name": "dba",
+        "Street Address": "address",
+        "City": "city",
+        "State": "state_code",
+        "Postal Code": "zip",
+        "License Type": "license_type",
+        "Expiration Date": "expiration_date"
+      },
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "Refresh is daily. Socrata API also available but we parse local Excel."
+    },
+
+    "Rhode Island": {
+      "file_type": "pdf",
+      "file_pattern": "*.pdf",
+      "filter": null,
+      "pdf_mode": "text",
+      "column_map": {
+        "Name": "legal_name",
+        "Address": "address",
+        "City": "city",
+        "State": "state_code",
+        "Zip": "zip"
+      },
+      "composite_license_key_fields": ["Name", "City"],
+      "status_rule": "header_period",
+      "expiry_month": 6,
+      "expiry_day": 30,
+      "notes": "Two PDFs: Unified License List (Distributors) and Uniform CTE Dealers List. Expiry = June 30 of stated period. No license number in file."
+    },
+
+    "Washington": {
+      "file_type": "excel",
+      "file_pattern": "*.xlsx",
+      "filter": null,
+      "column_map": {
+        "UBI#": "license_number",
+        "TradeName": "legal_name",
+        "PhysicalAddress": "address",
+        "PhysicalCity": "city",
+        "PhysicalState": "state_code",
+        "PhysicalZip": "zip",
+        "EndorsementType": "license_type",
+        "EndorsementExpireDate": "expiration_date"
+      },
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "UBI# is business identifier. License type (Tobacco Products Retailer/Distributor) in EndorsementType."
+    },
+
+    "Wisconsin": {
+      "file_type": "csv",
+      "file_pattern": "*.csv",
+      "filter": null,
+      "column_map": {
+        "LegalName": "legal_name",
+        "BusinessName": "dba",
+        "BusinessAddress": "address",
+        "City": "city",
+        "State": "state_code",
+        "Zip": "zip",
+        "County": "county",
+        "AgentName": "agent_name",
+        "Expiration": "expiration_date",
+        "LastUpdated": "last_updated"
+      },
+      "composite_license_key_fields": ["LegalName", "City"],
+      "status_rule": "date_based",
+      "expiration_date_field": "expiration_date",
+      "notes": "No explicit license number column. Composite key = LegalName + City. CIG/TOB/VAP flags indicate license categories."
+    }
+  },
+
+  "canonical_schema": [
+    "state",
+    "license_number",
+    "legal_name",
+    "dba",
+    "address",
+    "city",
+    "state_code",
+    "zip",
+    "issue_date",
+    "expiration_date",
+    "status",
+    "license_type",
+    "source_file_name",
+    "parsed_at"
+  ],
+
+  "output_dir": "output",
+  "quarantine_dir": "quarantine",
+  "log_file": "execution.log",
+  "distributors_dir": "distributors"
+}
