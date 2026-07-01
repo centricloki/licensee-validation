@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobacco License Verification Guide - Republic Brands</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
+        
+        :root {
+            --primary: #1a365d;
+            --accent: #c8102e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e2937;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .title {
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        
+        .sidebar {
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .state-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .state-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+        
+        .content-area {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+        
+        .welcome {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #64748b;
+        }
+        
+        .state-info {
+            display: none;
+        }
+        
+        .state-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .state-flag {
+            width: 48px;
+            height: 32px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .tier-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .steps-section {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .steps-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.35rem;
+        }
+        
+        ol {
+            counter-reset: step;
+        }
+        
+        ol li {
+            counter-increment: step;
+            margin-bottom: 1.25rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+        
+        ol li:before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .link-btn:hover {
+            background: #a10d24;
+            transform: translateY(-2px);
+        }
+        
+        .notes {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 1.25rem;
+            margin-top: 2rem;
+            border-radius: 6px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="title">Tobacco License Verification</h1>
+            <p class="subtitle">Republic Brands • Manual Lookup Guide for Non-Public Data States</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Select State</h3>
+                <select id="stateSelect" class="state-select" onchange="showStateInfo()">
+                    <option value="">-- Choose a State --</option>
+                    <!-- Populated by JS -->
+                </select>
+                
+                <div style="margin-top: 2rem; font-size: 0.9rem; color: #64748b;">
+                    <strong>Instructions:</strong><br>
+                    Select a state to view manual verification steps for tobacco licenses where public bulk data is unavailable.
+                </div>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+                    <small>⚠️ Tier 4 States: Manual verification required</small>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="content-area" id="contentArea">
+                <div id="welcomeScreen" class="welcome">
+                    <h2 style="margin-bottom: 1rem; color: #334155;">Welcome to the Verification Portal</h2>
+                    <p style="max-width: 420px; margin: 0 auto 2rem;">Select a U.S. state from the dropdown to receive detailed, step-by-step manual lookup instructions for tobacco license validation.</p>
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+                    <p style="font-size: 0.95rem; color: #64748b;">Data sourced from internal State Lookup database (June 2026)</p>
+                </div>
+                
+                <!-- Dynamic state content will be inserted here -->
+                <div id="stateContent"></div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        Republic Brands • Software Development Team • Internal Tool • Last Updated: July 2026
+    </footer>
+
+    <script>
+        // State data from the Excel (Tier 4 / Is Data Public? = No or equivalent)
+        const stateData = {
+            "Idaho": {
+                tier: "Tier 4",
+                url: "https://www.tobaccopermits.com/",
+                steps: `
+                    <ol>
+                        <li>Visit the Idaho Tobacco Project site for retail permit information.</li>
+                        <li>Contact State Tax Commission for distributor license details (208) 334-7660.</li>
+                        <li>Request license copy from customer and verify manually with agency.</li>
+                    </ol>
+                `,
+                notes: "No public lookup available for distributors. Retail reports available annually."
+            },
+            "Illinois": {
+                tier: "Tier 4",
+                url: "https://datacatalog.cookcountyil.gov/Finance-Administration/Wholesale-Tobacco-Dealers-Registered-with-the-Cook/fqrs-pn3x",
+                steps: `
+                    <ol>
+                        <li>For Cook County wholesale: Use the Socrata API or portal above.</li>
+                        <li>For statewide: Contact IL DOR Central Registration Division at (217) 785-3707.</li>
+                        <li>Request verification of MyTax Illinois registration.</li>
+                    </ol>
+                `,
+                notes: "Cook County has open data for wholesale. Statewide requires manual verification."
+            },
+            "Michigan": {
+                tier: "Tier 4",
+                url: "https://www.michigan.gov/taxes/business-taxes/tobacco/frequently-asked-questions-about-tobacco-tax",
+                steps: `
+                    <ol>
+                        <li>Visit Michigan Treasury FAQ page for tobacco tax guidance.</li>
+                        <li>Contact MDVA or Treasury Tobacco Tax Unit for license verification.</li>
+                        <li>Request a copy of the license from the customer for manual review.</li>
+                    </ol>
+                `,
+                notes: "No public retail license list. Login required for some systems."
+            },
+            "Mississippi": {
+                tier: "Tier 4",
+                url: "https://www.dor.ms.gov",
+                steps: `
+                    <ol>
+                        <li>Visit MS DOR website.</li>
+                        <li>Call (601) 923-7700 to verify licensee status.</li>
+                        <li>Use brand directories as supporting signal only.</li>
+                    </ol>
+                `,
+                notes: "No public permit holder lookup."
+            },
+            "New Jersey": {
+                tier: "Tier 4",
+                url: "https://www.nj.gov/treasury/taxation/tobacco.shtml",
+                steps: `
+                    <ol>
+                        <li>Visit NJ Division of Taxation tobacco page.</li>
+                        <li>License verification is a manual clearance process.</li>
+                        <li>Contact agency for specific licensee status.</li>
+                    </ol>
+                `,
+                notes: "Manual process required."
+            },
+            "North Carolina": {
+                tier: "Tier 4",
+                url: "https://www.ncdor.gov/taxes-forms/tobacco-products-tax/tobacco-products-tax-registration-and-other-forms",
+                steps: `
+                    <ol>
+                        <li>Visit NCDOR tobacco tax page.</li>
+                        <li>Contact Excise Tax Division for registration verification.</li>
+                        <li>No statewide retail license.</li>
+                    </ol>
+                `,
+                notes: "Brand directory available from AG."
+            },
+            "Oklahoma": {
+                tier: "Tier 4",
+                url: "https://oklahoma.gov/tax.html",
+                steps: `
+                    <ol>
+                        <li>Visit Oklahoma Tax Commission site.</li>
+                        <li>Call for Packet C license verification.</li>
+                        <li>No public lookup or list available.</li>
+                    </ol>
+                `,
+                notes: "All tiers licensed but no public data."
+            },
+            "South Dakota": {
+                tier: "Tier 4",
+                url: "https://dor.sd.gov/businesses/taxes/cigarette-tobacco/",
+                steps: `
+                    <ol>
+                        <li>Visit SD DOR Business Tax Division page.</li>
+                        <li>Contact them directly for licensee list or verification.</li>
+                    </ol>
+                `,
+                notes: "No separate retail license."
+            },
+            "Tennessee": {
+                tier: "Tier 4",
+                url: "https://www.tn.gov/revenue/taxes/tobacco-taxes/registration-and-licensing.html",
+                steps: `
+                    <ol>
+                        <li>Visit TN Dept. of Revenue TNTAP page.</li>
+                        <li>Contact (615) 253-0600 for verification.</li>
+                    </ol>
+                `,
+                notes: "Manufacturer directory only."
+            },
+            "West Virginia": {
+                tier: "Tier 4",
+                url: "https://tax.wv.gov/Business/ExciseTax/TobaccoTax/HowDoI/Pages/TobaccoTaxHowDoI.aspx",
+                steps: `
+                    <ol>
+                        <li>Visit WV Tax Division page.</li>
+                        <li>Contact (304) 558-3333 for verification.</li>
+                    </ol>
+                `,
+                notes: "Endorsement on business registration."
+            },
+            "Wyoming": {
+                tier: "Tier 4",
+                url: "https://excise-tax-div.wyo.gov/excise-tax-e-services",
+                steps: `
+                    <ol>
+                        <li>Visit WY DOR Excise Tax Division.</li>
+                        <li>Contact (307) 777-5200 or dor@wyo.gov.</li>
+                    </ol>
+                `,
+                notes: "Wholesalers/importers/manufacturers only."
+            },
+            "Alabama": {
+                tier: "Tier 3",
+                url: "https://www.revenue.alabama.gov/business-license/tobacco-manufacturersdistributors-number-listing/",
+                steps: `
+                    <ol>
+                        <li>Visit AL DOR Active Tobacco Accounts page.</li>
+                        <li>Download latest list from My Alabama Taxes.</li>
+                        <li>Wholesale permits do not expire until cancelled.</li>
+                    </ol>
+                `,
+                notes: "ABC tobacco permits not publicly searchable."
+            }
+            // Add more states from Excel as needed
+        };
+        
+        function populateStates() {
+            const select = document.getElementById('stateSelect');
+            Object.keys(stateData).sort().forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                select.appendChild(option);
+            });
+        }
+        
+        function showStateInfo() {
+            const state = document.getElementById('stateSelect').value;
+            const contentDiv = document.getElementById('stateContent');
+            const welcome = document.getElementById('welcomeScreen');
+            
+            if (!state) {
+                welcome.style.display = 'block';
+                contentDiv.innerHTML = '';
+                return;
+            }
+            
+            welcome.style.display = 'none';
+            
+            const data = stateData[state];
+            if (!data) return;
+            
+            contentDiv.innerHTML = `
+                <div class="state-header">
+                    <div class="state-flag">${state.substring(0,2)}</div>
+                    <div>
+                        <h2>${state}</h2>
+                        <span class="tier-badge">${data.tier} - Manual Verification</span>
+                    </div>
+                </div>
+                
+                <div class="steps-section">
+                    <h3>✅ Manual Verification Steps</h3>
+                    ${data.steps}
+                    ${data.url ? `
+                    <a href="${data.url}" target="_blank" class="link-btn">
+                        🌐 Open Official Portal
+                        <span style="font-size: 1.1rem;">↗</span>
+                    </a>` : ''}
+                </div>
+                
+                ${data.notes ? `
+                <div class="notes">
+                    <strong>Important Notes:</strong><br>
+                    ${data.notes}
+                </div>` : ''}
+                
+                <div style="margin-top: 2.5rem; padding: 1rem; background: #f1f5f9; border-radius: 8px; font-size: 0.9rem;">
+                    <strong>Pro Tip:</strong> Always request a copy of the customer's tobacco license and cross-reference with agency contact when possible.
+                </div>
+            `;
+        }
+        
+        // Initialize
+        window.onload = function() {
+            populateStates();
+        };
+    </script>
+</body>
+</html>

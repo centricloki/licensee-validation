@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Republic Brands – Tobacco License Manual Verification</title>
+<style>
+  :root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --blue: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-50: #eff6ff;
+    --border: #e2e8f0;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06);
+    --radius: 18px;
+    --green-bg: #dcfce7; --green-text:#166534; --green-br:#bbf7d0;
+    --amber-bg: #fef3c7; --amber-text:#92400e; --amber-br:#fde68a;
+    --slate-bg: #f1f5f9; --slate-text:#334155;
+  }
+  * { box-sizing: border-box; }
+  html,body { height:100%; }
+  body {
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height:1.5;
+  }
+  a { color: var(--blue); }
+  .wrap { max-width: 1120px; margin:0 auto; padding:0 20px; }
+
+  header {
+    background: radial-gradient(1200px 400px at 20% -10%, rgba(255,255,255,.15), transparent),
+                linear-gradient(135deg, #0b1220 0%, #1e3a8a 55%, #2563eb 100%);
+    color:#fff;
+    padding: 32px 0 56px;
+    position: sticky;
+    top:0;
+    z-index: 5;
+  }
+  .head {
+    display:flex; gap:16px; align-items:center;
+  }
+  .logo {
+    width:48px; height:48px; border-radius:14px;
+    background: rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.22);
+    display:grid; place-items:center; font-weight:800; letter-spacing:.5px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+    flex:0 0 48px;
+  }
+  h1 { font-size: clamp(20px, 2.6vw, 28px); margin:0; font-weight:750; letter-spacing:-.01em; }
+  .subtitle { margin:6px 0 0; opacity:.9; font-size:14px; }
+
+  .search-section {
+    background: var(--card);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding:18px;
+    margin-top:-28px;
+    position:relative;
+    z-index:10;
+  }
+  .search-label { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600; margin-bottom:8px; display:block; }
+  .search-box { position:relative; }
+  .search-input {
+    width:100%; padding:14px 44px 14px 42px;
+    border-radius:12px; border:1px solid var(--border);
+    background:#fff; font-size:15px; outline:none;
+    transition:.15s border, .15s box-shadow;
+  }
+  .search-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+  .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.6; }
+  .clear-btn {
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--border);
+    background:#fff; display:none; place-items:center; cursor:pointer;
+  }
+  .clear-btn:hover { background:#f8fafc; }
+
+  .suggestions {
+    position:absolute; left:0; right:0; top: calc(100% + 6px);
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    box-shadow: 0 10px 30px rgba(2,6,23,.12); max-height:260px; overflow:auto;
+    display:none; z-index:20;
+  }
+  .sugg-item { padding:10px 12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+  .sugg-item:hover, .sugg-item[aria-selected="true"] { background:#f8fafc; }
+  .sugg-sub { font-size:12px; color:var(--muted); }
+
+  .chips { margin-top:10px; font-size:12px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .chip { background:#f1f5f9; border:1px solid var(--border); padding:4px 8px; border-radius:999px; }
+
+  main { padding:24px 0 60px; }
+
+  .grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+    gap:12px; margin-top:18px;
+  }
+  .state-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:14px; text-align:left; cursor:pointer; box-shadow: var(--shadow);
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    position:relative; isolation:isolate;
+  }
+  .state-card:hover { transform: translateY(-2px); border-color:#c7d2fe; }
+  .state-card.active { outline:2px solid var(--blue); outline-offset:0; background: var(--blue-50); border-color:#93c5fd; }
+  .state-card:focus-visible { outline:2px solid var(--blue); }
+  .state-name { font-weight:700; font-size:15px; letter-spacing:-.01em; }
+  .state-agency { font-size:12px; color:var(--muted); margin-top:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:32px; }
+  .mini-badge { margin-top:10px; display:inline-block; font-size:11px; padding:4px 8px; border-radius:999px; background:#f8fafc; border:1px solid var(--border); color:#334155; }
+
+  .placeholder, .detail {
+    margin-top:22px;
+  }
+  .placeholder {
+    border:2px dashed var(--border); border-radius: var(--radius);
+    padding:40px 20px; text-align:center; color:var(--muted); background: linear-gradient(180deg, #fff, #fbfdff);
+  }
+  .placeholder h3 { margin:0 0 6px; color:#0f172a; font-size:18px; }
+  .placeholder p { margin:0; font-size:14px; }
+
+  .detail-card {
+    background:var(--card); border:1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow:hidden;
+  }
+  .detail-header {
+    padding:20px 20px 16px; border-bottom:1px solid var(--border);
+    display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+    background: linear-gradient(180deg, #ffffff, #f9fbff);
+  }
+  .detail-title { display:flex; gap:12px; align-items:center; }
+  .state-flag {
+    width:40px; height:40px; border-radius:10px; background: var(--blue-50); border:1px solid #dbeafe;
+    display:grid; place-items:center; font-weight:800; color: var(--blue-700);
+  }
+  .detail-header h2 { margin:0; font-size: clamp(22px, 3vw, 28px); letter-spacing:-.01em; }
+  .detail-header p { margin:2px 0 0; color:var(--muted); font-size:14px; }
+  .badges { display:flex; gap:8px; flex-wrap:wrap; }
+  .badge { padding:6px 10px; border-radius:999px; font-size:12px; font-weight:600; border:1px solid var(--border); background:#fff; white-space:nowrap; }
+  .badge-avail.type { background: #dbeafe; color:#1e40af; border-color:#bfdbfe; }
+  .badge-avail.none { background: var(--slate-bg); color: var(--slate-text); }
+  .badge-avail.expiry { background: var(--green-bg); color: var(--green-text); border-color: var(--green-br); }
+  .badge-avail.noexpiry { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-br); }
+  .badge-public { background:#f8fafc; }
+
+  .detail-body { padding:20px; display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; }
+  .section h3 { margin:0 0 10px; font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:#334155; }
+  .steps { font-size:15px; }
+  .steps p { margin:0 0 10px; }
+  .steps ol { margin:8px 0 14px 18px; padding:0; }
+  .steps li { margin:8px 0; }
+  .steps a, .notes a { text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }
+
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 4px; }
+  .btn {
+    appearance:none; border:1px solid var(--border); background:#fff; padding:10px 14px; border-radius:10px;
+    font-weight:600; font-size:14px; cursor:pointer; transition:.12s transform, .12s box-shadow, .12s background;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+  .btn:active { transform: translateY(0); }
+  .btn.primary { background: var(--blue); color:#fff; border-color: var(--blue); }
+  .btn.primary:hover { background: var(--blue-700); }
+
+  .notes { background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:14px; }
+  .notes h4 { margin:0 0 6px; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:#475569; }
+  .notes p { margin:0; font-size:14px; color:#334155; }
+
+  .right-col { display:flex; flex-direction:column; gap:14px; }
+  .meta-card { border:1px solid var(--border); border-radius:12px; padding:14px; background:#fff; }
+  .meta-card h4 { margin:0 0 8px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
+  .meta-item { font-size:14px; margin:6px 0; display:flex; gap:8px; }
+  .meta-item strong { min-width:110px; color:#334155; font-weight:600; }
+
+  .toast {
+    position:fixed; left:50%; bottom:24px; transform: translateX(-50%) translateY(20px);
+    background:#0f172a; color:#fff; padding:10px 14px; border-radius:10px; font-size:13px;
+    opacity:0; pointer-events:none; transition:.2s; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    z-index:50;
+  }
+  .toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+  footer { padding:30px 0 50px; text-align:center; color:var(--muted); font-size:13px; }
+
+  @media (max-width: 860px) {
+    .detail-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    header { padding:24px 0 48px; }
+    .head { align-items:flex-start; }
+    .search-section { padding:14px; }
+    .grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
+    .state-agency { min-height:0; -webkit-line-clamp:3; }
+    .detail-header { padding:16px; }
+    .detail-body { padding:16px; gap:18px; }
+    .btn { width:100%; justify-content:center; }
+    .actions { flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap head">
+      <div class="logo" aria-hidden="true">RB</div>
+      <div>
+        <h1>Republic Brands – Tobacco License Manual Verification</h1>
+        <p class="subtitle">For states with no public API (Is Data Public = No)</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="search-section" aria-label="State selector">
+      <label class="search-label" for="stateSearch">Find a state</label>
+      <div class="search-box">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3m1.8-4.2a7.5 7.5 0 11-15 0 7.5 0 0115 0z" stroke="#64748b" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="stateSearch" class="search-input" type="text" placeholder="Type to search Alabama, Alaska, Arizona…" autocomplete="off" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" />
+        <button id="clearBtn" class="clear-btn" aria-label="Clear search" title="Clear">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#475569" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div id="suggestions" class="suggestions" role="listbox" aria-label="State suggestions"></div>
+      </div>
+      <div class="chips"><span class="chip">9 states</span><span>Manual verification required • No public API</span></div>
+    </section>
+
+    <section id="stateGrid" class="grid" aria-label="Quick select states"></section>
+
+    <section id="placeholder" class="placeholder" role="status" aria-live="polite">
+      <h3>Select a state to view manual verification steps</h3>
+      <p>Choose from the search above or tap a state card. Links open in a new tab.</p>
+    </section>
+
+    <section id="detail" class="detail" hidden></section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied to clipboard</div>
+
+  <footer>
+    Built for Republic Brands Software Development Team – Lokender Tiwari
+  </footer>
+
+<script>
+const STATES = [
+  {
+    "state": "Alabama",
+    "agency": "Dept. of Revenue (tax) + ABC Board (permits)",
+    "license_availability": "No License detail",
+    "url": "https://www.revenue.alabama.gov/business-license/tobacco-manufacturersdistributors-number-listing/",
+    "steps": "Web page containing the Manufacturer/Distributor Number Listing.\n\nFrom ALDOR reply:\n1. Go to https://myalabamataxes.alabama.gov/tap/_/\n2. Scroll down to the Businesses Square\n3. Click on View or Upload a Report hyperlink\n4. In the Tobacco Reports Square click on Active Tobacco Accounts hyperlink",
+    "notes": "ABC tobacco permits not publicly searchable. Wholesale permits do not expire.",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "Alaska",
+    "agency": "Dept. of Revenue, Tax Division",
+    "license_availability": "License Number with Expiry",
+    "url": "https://online-tax.alaska.gov/ATP/WebDoc/_/#2",
+    "steps": "1. Click Search for a License button\n2. Locate Excise Tax Licenses section and click Tobacco Distributor Licenses\n3. Select Cigarette/Tobacco License Query with License Year End and License Type\n4. Generate and Export Excel\nLicense Types: Cigarette/Tobacco Distributor/Wholesaler/Retailer\n\nAlternative: BusinessLicense.Alaska.Gov > LICENSE SEARCH > Database Downloads > Endorsement Download (nightly Excel)",
+    "notes": "'Tobacco Dealer License Query' under Search for a License",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "Arizona",
+    "agency": "Dept. of Revenue (distributors)",
+    "license_availability": "No License detail",
+    "url": "https://azdor.gov/business/tobacco-luxury-tax/tobacco-luxury-tax-faqs",
+    "steps": "1. Go to Tobacco Luxury Tax page\n2. Locate Directory of Arizona Licensed Tobacco Distributors\n3. Click View Directory of Arizona Licensed Tobacco Distributors to download the PDF (updated monthly)",
+    "notes": "No automation available. Some cities (e.g., Tempe) license retail separately.",
+    "distributor_public": "Yes (PDF)"
+  },
+  {
+    "state": "Arkansas",
+    "agency": "Arkansas Tobacco Control Board",
+    "license_availability": "License Number without Expiry",
+    "url": "http://www.arkansas.gov/atcb/search.php",
+    "steps": "1. Scroll down to ATCB – Permit Holder Search section\n2. Click Submit button with empty form to get all records\n3. Export to Excel",
+    "notes": "Retail, wholesale, manufacturer permit types. Active wholesale list sent 2nd week of July annually.",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "Connecticut",
+    "agency": "Dept. of Revenue Services",
+    "license_availability": "License Type only",
+    "url": "https://portal.ct.gov/drs/myconnect/excise-distributor-dealer-supplier-lists",
+    "steps": "1. Go to Excise/Distributor/Dealer/Supplier Lists section\n2. Cigarette Distributors > Click Cigarette Distributor Licensing\n3. Cigarette Distributors > Click Licensed Cigarette Dealers\n4. Tobacco Distributors > Click Tobacco Distributors to view data\n\nFor verification: https://www.elicense.ct.gov/Lookup/LicenseLookup.aspx",
+    "notes": "Lists do not include expiry dates.",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "Iowa",
+    "agency": "Dept. of Revenue",
+    "license_availability": "License Type only",
+    "url": "https://revenue.iowa.gov/permits-licensing/cigarette-tobacco-nicotine-vapor",
+    "steps": "1. Locate 'Cigarette & Tobacco Tax' link\n2. Click Cigarette and Tobacco Permit Listing to navigate to Current Reports\n3. Download the most recent Cigarette and Tobacco Permit List (Excel)",
+    "notes": "Permits expire June 30 each year. No automation for verification.",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "Nebraska",
+    "agency": "Dept. of Revenue",
+    "license_availability": "License Type only",
+    "url": "https://revenue.nebraska.gov/businesses/cigarettes-other-tobacco-products",
+    "steps": "1. Locate 'Licensees' section\n2. Click 'Nebraska Licensed Cigarette Stamping Agents' to download Excel\n3. Click 'Nebraska Licensed Wholesalers of Tobacco Products Other than Cigarettes' to download Excel\n4. To verify active status, call Taxpayer Assistance: (402) 471-5729",
+    "notes": "Licensed OTP wholesalers list.",
+    "distributor_public": "Yes"
+  },
+  {
+    "state": "New Hampshire",
+    "agency": "Dept. of Revenue Administration / Liquor Commission",
+    "license_availability": "License Number with Expiry",
+    "url": "https://www.enforcement.liquor.nh.gov/licensing",
+    "steps": "1. Go to Licensing Lookup: https://www.enforcement.liquor.nh.gov/licensing\n2. Click 'Licensing Lookup'\n3. Enter business name or license parameter and search\n4. Click on Licensee name to view detailed information including expiry date\n\nAlternative PDF list: https://www.revenue.nh.gov/forms/documents/wholesale.pdf",
+    "notes": "Wholesaler list maintained manually.",
+    "distributor_public": "Yes (PDF)"
+  },
+  {
+    "state": "Wisconsin",
+    "agency": "DOR (permits all tiers); retail via municipalities",
+    "license_availability": "License Number with Expiry",
+    "url": "https://www.revenue.wi.gov/Pages/OnlineServices/retail-tobacco-license-search.aspx",
+    "steps": "1. Open Retail License Search page\n2. Locate 'Retail Cigarette, Tobacco Products, and Electronic Vaping Device License Search'\n3. Find CSV link to download file\n\nDirect permit file: https://www.revenue.wi.gov/DORReports/tobacco-product-permit.xlsx",
+    "notes": "Direct Excel of tobacco/vapor permittees available.",
+    "distributor_public": "Yes"
+  }
+].sort((a,b)=>a.state.localeCompare(b.state));
+
+const grid = document.getElementById('stateGrid');
+const searchInput = document.getElementById('stateSearch');
+const suggestions = document.getElementById('suggestions');
+const clearBtn = document.getElementById('clearBtn');
+const placeholder = document.getElementById('placeholder');
+const detail = document.getElementById('detail');
+const toast = document.getElementById('toast');
+
+function urlify(text) {
+  return text.replace(/(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+function stepsToHTML(text) {
+  const lines = text.split('\n');
+  let html = '';
+  let inOl = false;
+  let para = [];
+  const flushP = () => {
+    if (para.length) {
+      const joined = para.join(' ').trim();
+      if (joined) html += `<p>${urlify(joined)}</p>`;
+      para = [];
+    }
+  };
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { flushP(); if (inOl) { html += '</ol>'; inOl = false; } continue; }
+    const m = line.match(/^(\d+)\.\s*(.*)$/);
+    if (m) {
+      flushP();
+      if (!inOl) { html += '<ol>'; inOl = true; }
+      html += `<li>${urlify(m[2])}</li>`;
+    } else {
+      if (inOl) { html += '</ol>'; inOl = false; }
+      para.push(line);
+    }
+  }
+  flushP();
+  if (inOl) html += '</ol>';
+  return html;
+}
+
+function badgeClass(avail) {
+  const v = avail.toLowerCase();
+  if (v.includes('with expiry')) return 'expiry';
+  if (v.includes('without expiry')) return 'noexpiry';
+  if (v.includes('type only')) return 'type';
+  return 'none';
+}
+
+function renderGrid(filter='') {
+  const q = filter.trim().toLowerCase();
+  grid.innerHTML = '';
+  STATES.filter(s => !q || s.state.toLowerCase().includes(q) || s.agency.toLowerCase().includes(q))
+    .forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'state-card';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', `View ${s.state} verification steps`);
+      btn.dataset.state = s.state;
+      btn.innerHTML = `
+        <span class="state-name">${s.state}</span>
+        <span class="state-agency">${s.agency}</span>
+        <span class="mini-badge">${s.license_availability}</span>
+      `;
+      btn.addEventListener('click', () => selectState(s.state));
+      grid.appendChild(btn);
+    });
+}
+
+function selectState(name, scroll=true) {
+  const s = STATES.find(x => x.state === name);
+  if (!s) return;
+
+  // update active
+  document.querySelectorAll('.state-card').forEach(c => c.classList.toggle('active', c.dataset.state === name));
+  searchInput.value = s.state;
+  clearBtn.style.display = 'grid';
+  hideSuggestions();
+
+  placeholder.hidden = true;
+  detail.hidden = false;
+  detail.innerHTML = `
+    <article class="detail-card" aria-labelledby="detail-title">
+      <div class="detail-header">
+        <div class="detail-title">
+          <div class="state-flag" aria-hidden="true">${s.state.slice(0,2).toUpperCase()}</div>
+          <div>
+            <h2 id="detail-title">${s.state}</h2>
+            <p>${s.agency}</p>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge badge-avail ${badgeClass(s.license_availability)}" title="License Availability">${s.license_availability}</span>
+          <span class="badge badge-public" title="Distributor list public">Distributor List: ${s.distributor_public}</span>
+        </div>
+      </div>
+      <div class="detail-body">
+        <div>
+          <div class="section">
+            <h3>Steps to Verify</h3>
+            <div class="steps">${stepsToHTML(s.steps)}</div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="${s.url}" target="_blank" rel="noopener" aria-label="Open primary source for ${s.state}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Primary Source
+            </a>
+            <button class="btn" id="copyBtn" type="button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9z" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a1 1 0 01-1-1V4a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" stroke-width="2"/></svg>
+              Copy Steps
+            </button>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="meta-card">
+            <h4>At a Glance</h4>
+            <div class="meta-item"><strong>Agency</strong> <span>${s.agency}</span></div>
+            <div class="meta-item"><strong>Availability</strong> <span>${s.license_availability}</span></div>
+            <div class="meta-item"><strong>Distributor Public</strong> <span>${s.distributor_public}</span></div>
+          </div>
+          <div class="notes">
+            <h4>Notes</h4>
+            <p>${urlify(s.notes)}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const plain = `Republic Brands – Manual Tobacco License Verification
+State: ${s.state}
+Agency: ${s.agency}
+License Availability: ${s.license_availability}
+Distributor List Public: ${s.distributor_public}
+Primary Source: ${s.url}
+
+STEPS TO VERIFY:
+${s.steps}
+
+NOTES:
+${s.notes}`;
+    navigator.clipboard.writeText(plain).then(() => showToast('Steps copied')).catch(()=>showToast('Copy failed'));
+  });
+
+  if (scroll && window.matchMedia('(max-width: 860px)').matches) {
+    detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 1800);
+}
+
+function showSuggestions(q) {
+  if (!q) { hideSuggestions(); return; }
+  const matches = STATES.filter(s => s.state.toLowerCase().includes(q.toLowerCase())).slice(0,8);
+  if (!matches.length) { hideSuggestions(); return; }
+  suggestions.innerHTML = matches.map((s,i)=>`
+    <div class="sugg-item" role="option" data-state="${s.state}" aria-selected="${i===0}">
+      <span>${s.state}</span>
+      <span class="sugg-sub">${s.agency}</span>
+    </div>
+  `).join('');
+  suggestions.style.display = 'block';
+  searchInput.setAttribute('aria-expanded', 'true');
+  suggestions.querySelectorAll('.sugg-item').forEach(el=>{
+    el.addEventListener('mousedown', e=>{ e.preventDefault(); selectState(el.dataset.state); });
+  });
+}
+function hideSuggestions() {
+  suggestions.style.display = 'none';
+  searchInput.setAttribute('aria-expanded', 'false');
+}
+
+searchInput.addEventListener('input', e=>{
+  const q = e.target.value;
+  renderGrid(q);
+  showSuggestions(q);
+  clearBtn.style.display = q ? 'grid' : 'none';
+  if (!q) { detail.hidden = true; placeholder.hidden = false; document.querySelectorAll('.state-card').forEach(c=>c.classList.remove('active')); }
+});
+searchInput.addEventListener('keydown', e=>{
+  if (e.key === 'Enter') {
+    const first = suggestions.querySelector('.sugg-item');
+    if (first) { selectState(first.dataset.state); }
+    else {
+      const q = searchInput.value.trim().toLowerCase();
+      const exact = STATES.find(s=>s.state.toLowerCase()===q);
+      if (exact) selectState(exact.state);
+    }
+  }
+  if (e.key === 'Escape') { hideSuggestions(); }
+});
+document.addEventListener('click', (e)=>{
+  if (!e.target.closest('.search-box')) hideSuggestions();
+});
+clearBtn.addEventListener('click', ()=>{
+  searchInput.value=''; renderGrid(''); hideSuggestions(); clearBtn.style.display='none';
+  detail.hidden=true; placeholder.hidden=false; searchInput.focus();
+});
+
+// init
+renderGrid('');
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

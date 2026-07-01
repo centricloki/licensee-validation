@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tobacco License Verification Guide</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+        padding: 30px;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin: 20px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    .steps-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 5px solid #0078D4;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .steps-box h3 {
+        margin-top: 0;
+    }
+    .steps-box a {
+        color: #0078D4;
+        text-decoration: none;
+    }
+    .steps-box a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Tobacco License Verification (Manual Steps)</h1>
+
+    <select id="stateDropdown" onchange="showSteps()">
+        <option value="">-- Select a State --</option>
+        <option value="Alaska">Alaska</option>
+        <option value="Arkansas">Arkansas</option>
+        <option value="Connecticut">Connecticut</option>
+        <option value="Florida">Florida</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Kansas">Kansas</option>
+        <option value="Louisiana">Louisiana</option>
+        <option value="Missouri">Missouri</option>
+        <option value="SouthCarolina">South Carolina</option>
+        <option value="Arizona">Arizona</option>
+    </select>
+
+    <div id="stepsContainer" class="steps-box" style="display:none;"></div>
+</div>
+
+<script>
+const stepsData = {
+
+    Alaska: `
+        <h3>Alaska</h3>
+        <ol>
+            <li>Go to <a href="https://online-tax.alaska.gov/ATP/WebDoc/_/#2" target="_l</a></li>
+            <li>Click <b>Search for a License</b></li>
+            <li>Locate <b>Excise Tax Licenses</b></li>
+            <li>Select <b>Tobacco Distributor Licenses</b></li>
+            <li>Run query using license type or name</li>
+        </ol>
+    `,
+
+    Arkansas: `
+        <h3>Arkansas</h3>
+        <ol>
+            <li>Visit <a href="http://www.arkansas.gov/atcb/search.php" target="_a></li>
+            <li>Scroll to Permit Holder Search</li>
+            <li>Click <b>Submit</b> without filters to view data</li>
+            <li>Search by name or license number manually</li>
+        </ol>
+    `,
+
+    Connecticut: `
+        <h3>Connecticut</h3>
+        <ol>
+            <li>Go to <a href="https://portal.ct.gov/drs/myconnect/excise-distributorupplier-listsCT License Lists</a></li>
+            <li>Navigate to distributor/dealer lists</li>
+            <li>Review lists manually for business name</li>
+            <li>For verification, use <a href="https://www.elicense.ct.gov/Lookup/LicenseLookup.aspx" target="_blank       </ol>
+    `,
+
+    Florida: `
+        <h3>Florida</h3>
+        <ol>
+            <li>Open <a href="https://www.myfloridalicense.com/portalsearches/VerifyLicensee" target="_l</a></li>
+            <li>Select search type (Name or License Number)</li>
+            <li>Enter details and submit</li>
+            <li>Verify license status in results</li>
+        </ol>
+    `,
+
+    Georgia: `
+        <h3>Georgia</h3>
+        <ol>
+            <li>Visit <a href="https://dor.georgia.gov/active-tobaccoActive Tobacco Licenses</a></li>
+            <li>Download latest Excel file</li>
+            <li>Search manually for the business name</li>
+        </ol>
+    `,
+
+    Kansas: `
+        <h3>Kansas</h3>
+        <ol>
+            <li>Go to <a href="https://www.ksrevenue.gov" target="_te</a></li>
+            <li>Navigate: Taxation → Business Tax</li>
+            <li>Select Cigarette and Tobacco Licensing</li>
+            <li>Access database and search using filters</li>
+        </ol>
+    `,
+
+    Louisiana: `
+        <h3>Louisiana</h3>
+        <ol>
+            <li>Open <a href="https://laatcabc.atc.la.gov/laatcprod/pub/Default.aspx?PossePresentation=archATC License Search</a></li>
+            <li>Click <b>Search Licenses</b></li>
+            <li>Select <b>Issued Licenses</b></li>
+            <li>Filter by name, license number, or location</li>
+        </ol>
+    `,
+
+    Missouri: `
+        <h3>Missouri</h3>
+        <ol>
+            <li>Visit <a href="https://dor.mo.gov/taxation/business/tax-types/tobacco/licensee-list.php" target</li>
+            <li>View published list of licensees</li>
+            <li>Search manually by business name</li>
+        </ol>
+    `,
+
+    SouthCarolina: `
+        <h3>South Carolina</h3>
+        <ol>
+            <li>Go to <a href="https://dor.sc.gov/transparency/compliance-searches-license-validationse Validation</a></li>
+            <li>Select Cigarettes & Tobacco search</li>
+            <li>Run search and export results</li>
+            <li>For validation, use Retail License Verification Tool</li>
+        </ol>
+    `,
+
+    Arizona: `
+        <h3>Arizona</h3>
+        <ol>
+            <li>Visit <a href="https://azdor.gov/business/tobacco-luxury-tax/tobacco-luxury-tax-faqso Page</a></li>
+            <li>Locate Distributor Directory</li>
+            <li>Download PDF</li>
+            <li>Search manually for distributor name</li>
+        </ol>
+    `
+};
+
+function showSteps() {
+    const state = document.getElementById("stateDropdown").value;
+    const container = document.getElementById("stepsContainer");
+
+    if (state && stepsData[state]) {
+        container.innerHTML = stepsData[state];
+        container.style.display = "block";
+    } else {
+        container.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

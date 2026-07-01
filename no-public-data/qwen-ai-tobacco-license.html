@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Republic Brands - Tobacco License Validation Tool</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --accent-color: #0056b3;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 40px;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .search-card label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        #stateSearch {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        #stateSearch:focus {
+            border-color: var(--accent-color);
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .state-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .state-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .primary-link-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .primary-link-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .steps-list {
+            padding-left: 1.2rem;
+        }
+
+        .steps-list li {
+            margin-bottom: 1.2rem;
+            padding-left: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .steps-list li strong {
+            color: var(--primary-color);
+        }
+
+        .steps-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--accent-color);
+        }
+
+        .steps-list a:hover {
+            color: var(--primary-color);
+            border-bottom-style: solid;
+        }
+
+        .placeholder-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 2rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Republic Brands</h1>
+        <p>Tobacco License Validation Tool | Manual Verification Guide</p>
+    </header>
+
+    <div class="container">
+        <div class="search-card">
+            <label for="stateSearch">Select or Search State (Non-Public Data States):</label>
+            <input type="text" id="stateSearch" list="stateList" placeholder="Start typing (e.g., Alaska, Wisconsin...)" autocomplete="off">
+            <datalist id="stateList">
+                <!-- Options populated via JS -->
+            </datalist>
+        </div>
+
+        <div id="results-container">
+            <p class="placeholder-text">Please select a valid state from the list above to view verification steps.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Data compiled for Republic Brands Software Development Team. &copy; 2024</p>
+    </footer>
+
+    <script>
+        // Data filtered strictly for "Is Data Public?" = "No"
+        const statesData = [
+            {
+                state: "Alabama",
+                steps: [
+                    "Navigate to the <a href='https://myalabamataxes.alabama.gov/tap/_/' target='_blank' rel='noopener noreferrer'>My Alabama Taxes Portal</a>.",
+                    "Scroll down to the <strong>Businesses</strong> square and click <strong>View or Upload a Report</strong>.",
+                    "In the <strong>Tobacco Reports</strong> square, click on <strong>Active Tobacco Accounts</strong> to view the active listing."
+                ],
+                primaryUrl: { text: "AL DOR - Tobacco Listing", url: "https://www.revenue.alabama.gov/business-license/tobacco-manufacturersdistributors-number-listing/" }
+            },
+            {
+                state: "Alaska",
+                steps: [
+                    "Click the <strong>Search for a License</strong> button on the portal.",
+                    "Locate the <strong>Excise Tax Licenses</strong> section and click <strong>Tobacco Distributor Licenses</strong>.",
+                    "Use the <strong>Cigarette/Tobacco License Query</strong> with License Year End and License Type (Cigarette/Tobacco Distributor/Wholesaler/Retailer).",
+                    "Generate and Export the results to Excel."
+                ],
+                primaryUrl: { text: "AK Online Tax Portal", url: "https://online-tax.alaska.gov/ATP/WebDoc/_/#2" }
+            },
+            {
+                state: "Arizona",
+                steps: [
+                    "Locate and select the <strong>Tobacco Luxury Tax</strong> link.",
+                    "Locate the Directory of Arizona Licensed Tobacco Distributors.",
+                    "Click <strong>View Directory of Arizona Licensed Tobacco Distributors</strong> to download the monthly updated PDF."
+                ],
+                primaryUrl: { text: "AZ DOR - Tobacco Luxury Tax", url: "https://azdor.gov/business/tobacco-luxury-tax/tobacco-luxury-tax-faqs" }
+            },
+            {
+                state: "Arkansas",
+                steps: [
+                    "Scroll down to the <strong>ATCB – Permit Holder Search</strong> section.",
+                    "Click the <strong>Submit</strong> button with an empty form to retrieve all active records.",
+                    "Export the resulting data to Excel."
+                ],
+                primaryUrl: { text: "AR ATCB Permit Search", url: "http://www.arkansas.gov/atcb/search.php" }
+            },
+            {
+                state: "Connecticut",
+                steps: [
+                    "Locate the <strong>Excise/Distributor/Dealer/Supplier Lists</strong> section.",
+                    "For Cigarette Distributors: Click <strong>Cigarette Distributor Licensing</strong> or <strong>Licensed Cigarette Dealers</strong> to view data.",
+                    "For Tobacco Distributors: Click <strong>Tobacco Distributors</strong> to view data."
+                ],
+                primaryUrl: { text: "CT DRS Excise Lists", url: "https://portal.ct.gov/drs/myconnect/excise-distributor-dealer-supplier-lists" }
+            },
+            {
+                state: "Iowa",
+                steps: [
+                    "Locate the <strong>Cigarette & Tobacco Tax</strong> link.",
+                    "Click the <strong>Cigarette and Tobacco Permit Listing</strong> link to navigate to Current Reports.",
+                    "Locate the most recent permit list and download the <strong>Cigarette and Tobacco Permittees</strong> list in Excel format."
+                ],
+                primaryUrl: { text: "IA Revenue - Tobacco Permits", url: "https://revenue.iowa.gov/permits-licensing/cigarette-tobacco-nicotine-vapor" }
+            },
+            {
+                state: "Nebraska",
+                steps: [
+                    "Locate the “<strong>Licensees</strong>” section on the page.",
+                    "Click “<strong>Nebraska Licensed Cigarette Stamping Agents</strong>” to download the Excel file.",
+                    "In the same section, click “<strong>Nebraska Licensed Wholesalers of Tobacco Products Other than Cigarettes</strong>” to download the Excel file."
+                ],
+                primaryUrl: { text: "NE Revenue - Tobacco Products", url: "https://revenue.nebraska.gov/businesses/cigarettes-other-tobacco-products" }
+            },
+            {
+                state: "New Hampshire",
+                steps: [
+                    "Locate section \"Need a Tobacco Tax Certificate?\" and click the <a href='https://www.enforcement.liquor.nh.gov/licensing' target='_blank' rel='noopener noreferrer'>Licensing Portal</a>.",
+                    "Locate section \"Licensing\" and click <strong>Licensing Lookup</strong>.",
+                    "Enter valid parameters and search.",
+                    "Find the list of Licensees and click on the Licensee name. Detailed Information will have the expiry date."
+                ],
+                primaryUrl: { text: "NH Wholesale PDF List", url: "https://www.revenue.nh.gov/forms/documents/wholesale.pdf" }
+            },
+            {
+                state: "Wisconsin",
+                steps: [
+                    "Open the <a href='https://www.revenue.wi.gov/Pages/OnlineServices/retail-tobacco-license-search.aspx' target='_blank' rel='noopener noreferrer'>Retail Tobacco License Search</a> page.",
+                    "Locate section \"<strong>Retail Cigarette, Tobacco Products, and Electronic Vaping Device License Search</strong>\".",
+                    "Find the CSV/Excel link to download the active permittee file."
+                ],
+                primaryUrl: { text: "WI DOR - Tobacco Permits", url: "https://www.revenue.wi.gov/DORReports/tobacco-product-permit.xlsx" }
+            }
+        ];
+
+        // DOM Elements
+        const searchInput = document.getElementById('stateSearch');
+        const datalist = document.getElementById('stateList');
+        const resultsContainer = document.getElementById('results-container');
+
+        // Populate Datalist
+        statesData.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.state;
+            datalist.appendChild(option);
+        });
+
+        // Render Function
+        function renderState(data) {
+            let stepsHtml = data.steps.map(step => `<li>${step}</li>`).join('');
+            
+            resultsContainer.innerHTML = `
+                <div class="results-card" style="display: block;">
+                    <div class="state-header">
+                        <h2>${data.state}</h2>
+                        <a href="${data.primaryUrl.url}" target="_blank" rel="noopener noreferrer" class="primary-link-btn">
+                            Visit Portal &rarr;
+                        </a>
+                    </div>
+                    <h3 style="margin-top:0; color: var(--text-muted); font-size: 1rem; font-weight: 500;">Manual Verification Steps:</h3>
+                    <ol class="steps-list">
+                        ${stepsHtml}
+                    </ol>
+                </div>
+            `;
+        }
+
+        // Event Listener for Autosuggest / Selection
+        searchInput.addEventListener('input', function() {
+            const val = this.value.trim().toLowerCase();
+            const stateData = statesData.find(s => s.state.toLowerCase() === val);
+            
+            if (stateData) {
+                renderState(stateData);
+            } else if (val === "") {
+                resultsContainer.innerHTML = '<p class="placeholder-text">Please select a valid state from the list above to view verification steps.</p>';
+            } else {
+                resultsContainer.innerHTML = '<p class="placeholder-text">No matching state found. Please ensure you select a state from the dropdown list.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
